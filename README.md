@@ -23,6 +23,12 @@ Follow these steps to set up and run the application locally:
 
    
 Sample User Credentials for Testing
+| Role           | Username | Password  |
+| -------------- | -------- | --------- |
+| Superuser      | admin    | admin     |
+| Regular User 1 | user1    | user1pass |
+| Regular User 2 | user2    | user2pass |
+
   Role	      Username	    Password
   Superuser	  admin	        admin
   Regular     user 1	      user1	

@@ -7,7 +7,7 @@ This project is a simple social media web application built with Django for the 
 
 Follow these steps to set up and run the application locally:
 
-1. Download these files and run locally
+1. Download zip file and run locally
 2. Create and activate Virtual environment
    python -m venv env
    source env/bin/activate

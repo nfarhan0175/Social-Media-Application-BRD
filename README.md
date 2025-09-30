@@ -26,13 +26,8 @@ Sample User Credentials for Testing
 | Role           | Username | Password  |
 | -------------- | -------- | --------- |
 | Superuser      | admin    | admin     |
-| Regular User 1 | user1    | user1pass |
-| Regular User 2 | user2    | user2pass |
-
-  Role	      Username	    Password
-  Superuser	  admin	        admin
-  Regular     user 1	      user1	
-  Regular     user 2	      user2
+| Regular User 1 | user1    | user1     |
+| Regular User 2 | user2    | user2     |
 
 
 Implemented Features Summary
@@ -49,5 +44,7 @@ Implemented Features Summary
 
 
 ER Diagram
-
-<img width="546" height="217" alt="image" src="https://github.com/user-attachments/assets/769a8428-2e1d-4335-b745-e02fb811d7e3" />
+This ERD shows two entities: User and Post with a one-to-many relationship. One user can create multiple posts, and each post belongs to one user.
+   User: id (PK), username, email, password, etc.
+   Post: id (PK), user_id (FK), content, image, created_at, updated_at
+Users can create, update, and delete their own posts. Proper authorization should be enforced to restrict these actions to the post owner.

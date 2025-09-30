@@ -12,14 +12,14 @@ Follow these steps to set up and run the application locally:
    1. python -m venv env
    2. env/bin/activate
 3. Install Django
-   pip install django
+   1. pip install django
 4. Apply database migrations
-   python manage.py makemigrations
-   python manage.py migration
+   1. python manage.py makemigrations
+   2. python manage.py migration
 5. create superuser
-   python manage.py createsuperuser
+   1. python manage.py createsuperuser
 6. Run server
-   python manage.py runserver 3000
+   1. python manage.py runserver 3000
 
    
 ## Sample User Credentials for Testing

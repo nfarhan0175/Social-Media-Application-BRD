@@ -44,3 +44,4 @@ Implemented Features Summary
 
 ER Diagram
 
+<img width="546" height="217" alt="image" src="https://github.com/user-attachments/assets/769a8428-2e1d-4335-b745-e02fb811d7e3" />

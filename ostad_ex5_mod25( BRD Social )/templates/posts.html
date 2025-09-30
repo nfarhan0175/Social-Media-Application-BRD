@@ -1,0 +1,23 @@
+{% extends "index.html" %}
+{% block content %}
+    {% for post in posts %}
+        <div class="d-flex justify-content-center">
+            <div class="card" style="width: 50rem;">
+                <div class="card" style="width: 20rem; padding: 10px;border:1px;">
+                    <b>Posted by {{ post.user.username }}</b>
+                    {% comment %} <p>user pic</p> {% endcomment %}
+                </div>
+                {% if post.photos %}
+                    <img class="card-img-top" src="{{post.photos.url}}" height="500px" alt="Card image cap">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{post.title}}</h5>
+                    <p class="date text-muted">{{ post.created_at|date:"F j, Y, g:i a" }}</p>
+                    <p class="card-text">{{post.description}}</p>
+                </div>
+            </div>
+        </div>
+        <br><br>
+    {% endfor %}
+{% endblock %}
+

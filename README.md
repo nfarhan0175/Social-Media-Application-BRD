@@ -22,7 +22,7 @@ Follow these steps to set up and run the application locally:
    python manage.py runserver 3000
 
    
-Sample User Credentials for Testing
+## Sample User Credentials for Testing
 | Role           | Username | Password  |
 | -------------- | -------- | --------- |
 | Superuser      | admin    | admin     |
@@ -30,7 +30,7 @@ Sample User Credentials for Testing
 | Regular User 2 | user2    | user2     |
 
 
-Implemented Features Summary
+## Implemented Features Summary
 
 1. User registration with username, email, password, and password confirmation
 2. User authentication with login and logout
@@ -43,7 +43,7 @@ Implemented Features Summary
 9. Secure access control using Django authentication mixins and decorators
 
 
-ER Diagram
+## ER Diagram
 
 This ERD shows two entities: User and Post with a one-to-many relationship. One user can create multiple posts, and each post belongs to one user.
    User: id (PK), username, email, password, etc.

@@ -9,8 +9,8 @@ Follow these steps to set up and run the application locally:
 
 1. Download zip file and run locally
 2. Create and activate Virtual environment
-   python -m venv env
-   source env/bin/activate
+   1. python -m venv env
+   2. env/bin/activate
 3. Install Django
    pip install django
 4. Apply database migrations

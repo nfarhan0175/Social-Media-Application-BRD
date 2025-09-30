@@ -49,4 +49,5 @@ This ERD shows two entities: User and Post with a one-to-many relationship. One 
    User: id (PK), username, email, password, etc.
    Post: id (PK), user_id (FK), content, image, created_at, updated_at
 Users can create, update, and delete their own posts. Proper authorization should be enforced to restrict these actions to the post owner.
-<img width="581" height="211" alt="image" src="https://github.com/user-attachments/assets/c639e137-2cb3-43cb-9824-b9fd6d4a5ad3" />
+
+# <img width="581" height="211" alt="image" src="https://github.com/user-attachments/assets/c639e137-2cb3-43cb-9824-b9fd6d4a5ad3" />

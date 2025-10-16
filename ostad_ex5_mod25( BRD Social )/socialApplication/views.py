@@ -156,5 +156,4 @@ def post_list(request):
         'userposts': posts if is_profile else None,
         'authors': authors,
         'is_profile': is_profile,
-
     })

@@ -1,0 +1,70 @@
+{% extends "index.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container mt-4">
+    <div class="row">
+        <!-- Left Column: User Profile -->
+        <div class="col-md-4 " >
+            <div class="card mb-4 " style="width: 100%; max-width: 20rem; ">
+                <div class="card-body text-center">
+                    <img id="profilePic" class="rounded-5" height="200px" alt="Profile image" style="cursor: pointer;"
+                         src="{% static 'image/profile.jpg' %}">
+                    <p><strong>Username:</strong> {{ user.username }}</p>
+                    <p><strong>Email:</strong> {{ user.email }}</p>
+                    <p><strong>Bio:</strong> (Optional bio section)</p>
+                    <a href="#" class="btn btn-success w-100 mt-3">Edit Profile</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Filters + User Posts -->
+        <div class="col-md-8">
+            
+            <!-- Filter Section -->
+            <div class="card mb-4 p-3">
+                <h5>Filter My Posts</h5>
+
+                <!-- Date Filters -->
+                <div class="mb-2">
+                    <strong>Date:</strong>
+                    <a href="?date=today" class="btn btn-sm btn-outline-primary">Today</a>
+                    <a href="?date=week" class="btn btn-sm btn-outline-primary">This Week</a>
+                    <a href="?date=month" class="btn btn-sm btn-outline-primary">This Month</a>
+                </div>
+
+                <!-- Media Type Filters -->
+                <div class="mb-2">
+                    <strong>Media:</strong>
+                    <a href="?media=image" class="btn btn-sm btn-outline-success">Images</a>
+                    <a href="?media=none" class="btn btn-sm btn-outline-success">Text Only</a>
+                </div>
+
+                <!-- Reset Filters -->
+                <a href="{% url 'profile' %}" class="btn btn-sm btn-outline-secondary mt-2">Clear Filters</a>
+
+            </div>
+
+            <!-- User Posts -->
+            {% for post in userposts %}
+                <div class="card mb-4" style="width: 100%;">
+                    {% if post.photos and post.photos.url %}
+                        <img class="card-img-top" src="{{ post.photos.url }}" height="500px" alt="Post image">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ post.title }}</h5>
+                        <p class="date text-muted">{{ post.created_at|date:"F j, Y, g:i a" }}</p>
+                        <p class="card-text">{{ post.description }}</p>
+                        <a href="{% url 'edit' post.id %}" class="btn btn-success">Edit</a>
+                        <a href="{% url 'delete' post.id %}" onclick="return confirm('Are you sure you want to delete this post?');" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            {% empty %}
+                <p>No posts found.</p>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

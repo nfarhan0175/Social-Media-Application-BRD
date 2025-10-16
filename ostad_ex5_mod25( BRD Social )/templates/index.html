@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRD Social Application</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light p-4">
+    <a class="navbar-brand ms-3" href="#">BRD</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent"
+        aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-between" id="navbarContent">
+        <!-- Left: Navigation Links -->
+        <ul class="navbar-nav">
+            <li class="nav-item {% if request.resolver_match.url_name == 'home' %}active{% endif %}">
+                <a class="nav-link" href="{% url 'home' %}"><span>Home</span></a>
+            </li>
+           <li class="nav-item {% if request.resolver_match.url_name == 'profile' %}active{% endif %}">
+               <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+            </li>
+        </ul>
+        <!-- Center: Search Bar -->
+       <form class="form-inline d-flex mx-auto" method="get" action="{% url 'post_list' %}">
+    <input class="form-control me-2" type="search" name="q" placeholder="Search posts..." aria-label="Search" value="{{ request.GET.q }}">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
+        <!-- Right: Login/Logout Buttons -->
+        <ul class="navbar-nav">
+            {% if user.is_authenticated %}
+            <li class="nav-item d-flex align-items-center">
+                <b>{{ user }}</b>
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'register' %}">Register</a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+
+<div class="container mt-3">
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+</div>
+
+<main class="container my-4">
+    {% block content %}
+    {% endblock %}
+</main>
+
+<a href="{% url 'create' %}" 
+   class="btn btn-secondary btn-lg rounded-circle shadow 
+          position-fixed d-flex justify-content-center align-items-center"
+   style="bottom: 30px; right: 30px; width: 60px; height: 60px; z-index: 1050;">
+    <i class="fas fa-plus"></i>
+</a>
+
+<footer class="py-3 mt-auto bg-light border-top">
+  <div class="container">
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item"><a href="/" class="nav-link px-2 text-muted">Home</a></li>
+      <li class="nav-item"><a href="" class="nav-link px-2 text-muted">Features</a></li>
+      <li class="nav-item"><a href="" class="nav-link px-2 text-muted">Pricing</a></li>
+      <li class="nav-item"><a href="" class="nav-link px-2 text-muted">FAQs</a></li>
+      <li class="nav-item"><a href="" class="nav-link px-2 text-muted">About Us</a></li>
+      <li class="nav-item"><a href="" class="nav-link px-2 text-muted">Contact</a></li>
+      <li class="nav-item"><a href="" class="nav-link px-2 text-muted">Privacy Policy</a></li>
+      <li class="nav-item"><a href="" class="nav-link px-2 text-muted">Terms of Service</a></li>
+    </ul>
+    <p class="text-center text-muted mb-0">&copy; 2025 developed by Nuzhat farhan </p>
+  </div>
+</footer>
+
+<script src="{% static 'js/index.js' %}"></script>
+
+</body>
+</html>

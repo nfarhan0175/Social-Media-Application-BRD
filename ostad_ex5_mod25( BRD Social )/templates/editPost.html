@@ -1,0 +1,11 @@
+{% extends "index.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <h2>Update the Post</h2>
+    <form class="container" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ postForm|crispy }}  {# OR {{ form|crispy }} if you rename the context key #}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{% endblock %}

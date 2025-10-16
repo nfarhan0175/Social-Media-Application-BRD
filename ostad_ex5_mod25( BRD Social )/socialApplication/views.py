@@ -102,7 +102,6 @@ def delete(request,id):
     messages.success(request, "Post deleted successfully.")
     return redirect('profile')
 
-# live test
 def post_list(request):
     # Determine if this is the profile view
     is_profile = 'profile' in request.path
@@ -157,3 +156,4 @@ def post_list(request):
         'authors': authors,
         'is_profile': is_profile,
     })
+

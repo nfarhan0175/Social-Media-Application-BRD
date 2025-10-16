@@ -27,10 +27,10 @@
             </li>
         </ul>
         <!-- Center: Search Bar -->
-       <form class="form-inline d-flex mx-auto" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+       <form class="form-inline d-flex mx-auto" method="get" action="{% url 'post_list' %}">
+    <input class="form-control me-2" type="search" name="q" placeholder="Search posts..." aria-label="Search" value="{{ request.GET.q }}">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
         <!-- Right: Login/Logout Buttons -->
         <ul class="navbar-nav">
             {% if user.is_authenticated %}

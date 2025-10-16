@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
 from . import forms,models
+from datetime import datetime, timedelta
+from django.db.models import Q
 
 # Create your views here.
 def custom_login(request):
@@ -100,4 +102,59 @@ def delete(request,id):
     messages.success(request, "Post deleted successfully.")
     return redirect('profile')
 
- 
+# live test
+def post_list(request):
+    # Determine if this is the profile view
+    is_profile = 'profile' in request.path
+
+    # Default: all posts
+    posts = models.addPost.objects.all()
+
+    # If profile page, show only user's posts
+    if is_profile and request.user.is_authenticated:
+        posts = posts.filter(user=request.user)
+
+    # Filters
+    date_filter = request.GET.get('date')
+    media_filter = request.GET.get('media')
+    author_filter = request.GET.get('author')
+
+    # Search
+    query = request.GET.get('q')
+    if query:
+        posts = posts.filter(
+            Q(title__icontains=query) |
+            Q(description__icontains=query) |
+            Q(user__username__icontains=query)
+        )
+    # Date filters
+    if date_filter == 'today':
+        posts = posts.filter(created_at__date=datetime.today())
+    elif date_filter == 'week':
+        posts = posts.filter(created_at__date__gte=datetime.today() - timedelta(days=7))
+    elif date_filter == 'month':
+        posts = posts.filter(created_at__date__gte=datetime.today() - timedelta(days=30))
+
+    # Media filters
+    if media_filter == 'image':
+        posts = posts.filter(photos__icontains='.jpg')
+    elif media_filter == 'none':
+        posts = posts.filter(photos='')
+
+    # Author filter (only on posts page)
+    if not is_profile and author_filter:
+        posts = posts.filter(user__username=author_filter)
+
+    # Pass authors only if needed
+    authors = User.objects.all() if not is_profile else None
+
+    # Choose template based on request path
+    template = 'profile.html' if is_profile else 'posts.html'
+
+    return render(request, template, {
+        'posts': posts if not is_profile else None,
+        'userposts': posts if is_profile else None,
+        'authors': authors,
+        'is_profile': is_profile,
+
+    })
